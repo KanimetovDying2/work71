@@ -1,8 +1,4 @@
-
 const AdminDishesPage = () => {
-  return (
-    <div>
-    </div>
-  );
+  return <div></div>;
 };
 export default AdminDishesPage;
