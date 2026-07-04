@@ -27,18 +27,44 @@ const Cart = () => {
   }, 150);
 
   return (
-    <div>
-      {cartEntries.map(([id, count]) => {
-        const dish = dishMap[id];
-        if (!dish) return null;
-        return (
-          <div key={id}>
-            {dish.title} - {count} x - {dish.price * count} KGS
-            <button onClick={() => dispatch(removeFromCart(id))}>Remove</button>
-          </div>
-        );
-      })}
-      <strong>Total: {total}</strong>
+    <div className="space-y-4">
+      <div className="space-y-3">
+        {cartEntries.map(([id, count]) => {
+          const dish = dishMap[id];
+          if (!dish) return null;
+          return (
+            <div
+              key={id}
+              className="flex justify-between items-center bg-gray-50 p-3 rounded-xl"
+            >
+              <div>
+                <span className="font-semibold text-gray-800">
+                  {dish.title}
+                </span>
+                <p className="text-sm text-gray-500">
+                  {count} x {dish.price} KGS
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="font-bold text-gray-800">
+                  {dish.price * count} KGS
+                </span>
+                <button
+                  onClick={() => dispatch(removeFromCart(id))}
+                  className="text-red-500 hover:text-red-700 text-sm font-medium"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="border-t border-gray-200 pt-4 flex justify-between items-center text-lg">
+        <span className="font-bold text-gray-800">Total (with delivery):</span>
+        <span className="text-indigo-600 font-extrabold">{total} KGS</span>
+      </div>
     </div>
   );
 };

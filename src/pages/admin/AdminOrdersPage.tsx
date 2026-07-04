@@ -17,43 +17,58 @@ const AdminOrdersPage = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
-      <h1>Orders</h1>
+    <div className="space-y-6">
+      <h1 className="text-2xl font-bold text-gray-800">Customer Orders</h1>
+
       {orders.length === 0 ? (
-        <p>No orders yet.</p>
+        <div className="text-gray-500 bg-white p-8 rounded-2xl text-center border border-gray-100">
+          No orders yet.
+        </div>
       ) : (
-        orders.map((o) => (
-          <div
-            key={o.id}
-            style={{
-              border: "1px solid #ccc",
-              margin: "10px",
-              padding: "10px",
-            }}
-          >
-            <h3>Customer: {o.customer.name}</h3>
-            <p>Address: {o.customer.address}</p>
-            <p>Phone: {o.customer.phone}</p>
-
-            <strong>Items:</strong>
-            {Object.entries(o.items).map(([dishId, count]) => {
-              const dish = dishes.find((d) => d.id === dishId);
-              return (
-                <div key={dishId}>
-                  {dish ? dish.title : "Unknown"} x {count}
-                </div>
-              );
-            })}
-
-            <button
-              disabled={loading}
-              onClick={() => dispatch(deleteOrder(o.id))}
-              style={{ marginTop: "10px" }}
+        <div className="grid gap-6">
+          {orders.map((o) => (
+            <div
+              key={o.id}
+              className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
             >
-              Complete Order
-            </button>
-          </div>
-        ))
+              <div className="flex justify-between items-start border-b border-gray-50 pb-4 mb-4">
+                <div>
+                  <h3 className="font-bold text-lg text-gray-800">
+                    {o.customer.name}
+                  </h3>
+                  <p className="text-sm text-gray-500">{o.customer.address}</p>
+                  <p className="text-sm font-medium text-indigo-600">
+                    {o.customer.phone}
+                  </p>
+                </div>
+                <button
+                  disabled={loading}
+                  onClick={() => dispatch(deleteOrder(o.id))}
+                  className="px-4 py-2 bg-green-50 hover:bg-green-100 text-green-700 text-sm font-semibold rounded-lg transition-colors"
+                >
+                  Complete Order
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                  Order items:
+                </p>
+                {Object.entries(o.items).map(([dishId, count]) => {
+                  const dish = dishes.find((d) => d.id === dishId);
+                  return (
+                    <div key={dishId} className="flex justify-between text-sm">
+                      <span className="text-gray-700">
+                        {dish ? dish.title : "Unknown"}
+                      </span>
+                      <span className="font-medium">x {count}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
