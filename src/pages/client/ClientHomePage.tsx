@@ -4,6 +4,7 @@ import { fetchDishes } from "../../store/dishesSlice";
 import { addToCart } from "../../store/cartSlice";
 import Modal from "./Modal";
 import Cart from "./Cart";
+import CheckoutForm from "./CheckoutForm";
 
 const ClientHomePage = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,7 @@ const ClientHomePage = () => {
 
       <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Cart />
-        {"checkoutForm soon"}
+        <CheckoutForm />.
       </Modal>
     </div>
   );

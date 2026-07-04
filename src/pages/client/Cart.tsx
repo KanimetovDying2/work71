@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { removeFromCart } from "../../store/cartSlice";
+import type { DishT } from "../../types";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -11,8 +12,11 @@ const Cart = () => {
   }
 
   const dishMap = dishes.reduce(
-    (acc, d) => ({ ...acc, [d.id]: d }),
-    {} as Record<string, any>,
+    (acc, d) => {
+      acc[d.id] = d;
+      return acc;
+    },
+    {} as Record<string, DishT>,
   );
 
   const cartEntries = Object.entries(items);
@@ -29,7 +33,7 @@ const Cart = () => {
         if (!dish) return null;
         return (
           <div key={id}>
-            {dish.title} - {count} x - {dish.price * count} som
+            {dish.title} - {count} x - {dish.price * count} KGS
             <button onClick={() => dispatch(removeFromCart(id))}>Remove</button>
           </div>
         );

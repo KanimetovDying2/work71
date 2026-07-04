@@ -7,8 +7,15 @@ interface ModalProps {
 const Modal = ({ show, onClose, children }: ModalProps) => {
   if (!show) return null;
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <div
+      onClick={handleBackdropClick}
       style={{
         position: "fixed",
         top: 0,
@@ -19,6 +26,8 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        zIndex: 50,
+        cursor: "pointer",
       }}
     >
       <div
@@ -27,6 +36,7 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
           padding: "20px",
           borderRadius: "8px",
           minWidth: "300px",
+          cursor: "default",
         }}
       >
         <button onClick={onClose}>Close</button>
@@ -35,4 +45,5 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
     </div>
   );
 };
+
 export default Modal;

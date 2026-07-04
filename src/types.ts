@@ -11,4 +11,21 @@ export interface DishTMutation {
   image: string;
 }
 
-export interface Order {}
+export interface OrderData {
+  customer: {
+    name: string;
+    address: string;
+    phone: string;
+  };
+  items: Record<string, number>;
+}
+
+export interface OrderT {
+  id: string;
+  customer: {
+    name: string;
+    address: string;
+    phone: string;
+  };
+  items: Record<string, number>;
+}
