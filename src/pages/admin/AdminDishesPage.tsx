@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { addDish, deleteDish, fetchDishes } from "../../store/dishesSlice";
+import { deleteDish, fetchDishes } from "../../store/dishesSlice";
 import Spinner from "../../components/Spinner";
 import Dish from "../../components/Dish";
 
