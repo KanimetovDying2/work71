@@ -7,7 +7,7 @@ export interface DishT {
 
 export interface DishTMutation {
   title: string;
-  price: number;
+  price: string | number;
   image: string;
 }
 

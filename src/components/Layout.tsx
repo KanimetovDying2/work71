@@ -5,7 +5,7 @@ const Layout = () => {
     <div>
       <header>
         <nav>
-          <h1>Turtle Pizza Admin Panel</h1>
+          <NavLink to="/admin/dishes">Turtle Pizza Admin Panel</NavLink>
           <NavLink to="/admin/add">Add New Dish!</NavLink>
           <NavLink to="/admin/dishes">Dishes</NavLink>
           <NavLink to="/admin/orders">Orders</NavLink>
