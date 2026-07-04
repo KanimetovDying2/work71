@@ -11,9 +11,15 @@ const CheckoutForm = ({ onSuccess }: Props) => {
   const [form, setForm] = useState({ name: "", address: "", phone: "" });
   const items = useAppSelector((state) => state.cart.items);
 
-  const isFormInvalid = !form.name || !form.address || !form.phone;
+  const isCartEmpty = Object.keys(items).length === 0;
+  const isFormInvalid =
+    !form.name.trim() ||
+    !form.address.trim() ||
+    !form.phone.trim() ||
+    isCartEmpty;
 
   const submitHandler = () => {
+    if (isFormInvalid) return;
     const orderData = { customer: form, items };
     dispatch(createOrder(orderData));
     onSuccess();

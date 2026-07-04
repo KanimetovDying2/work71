@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchOrders, deleteOrder } from "../../store/ordersSlice";
 import { fetchDishes } from "../../store/dishesSlice";
+import Spinner from "../../components/Spinner";
 
 const AdminOrdersPage = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ const AdminOrdersPage = () => {
     dispatch(fetchDishes());
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner />;
   if (error) return <div>Error: {error}</div>;
 
   return (
